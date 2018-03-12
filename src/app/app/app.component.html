@@ -1,0 +1,212 @@
+<!-- <p>
+  Parent Component
+</p> -->
+<h3> Dynamic Loading of components</h3>
+  
+  <div>
+      <h2>Lets dynamically create some components!</h2>
+      <button (click)="createHelloWorldComponent()">Create Hello World</button>
+      <button (click)="createWorldHelloComponent()">Create World Hello</button>
+  </div>
+    <app-dynamic [componentData]="componentData"></app-dynamic>
+
+<h4>End of Dynamic loading components</h4>
+
+
+<app-app-child [heading]="heading"
+			[namefromparent]="name"
+			[agefromParent]="age"
+			(addStudentEvent)="saveData(username)">
+
+</app-app-child>
+<hr/>
+<input type="text" [(ngModel)]="filteredStatus">
+
+
+
+<ul>
+  <li *ngFor="let server of servers | filter:filteredStatus">
+    {{server}}
+  </li>
+</ul>
+<hr/>
+
+
+<h2>Parent componet output decorator</h2>
+<h3>{{usernameof}}</h3>
+
+<p c-highlight>HIIIIIIIIIIIIIIIIIIIII</p>
+
+
+<h1>My First Attribute Directive</h1>
+
+<h4>Pick a highlight color</h4>
+<div>
+  <input type="radio" name="colors" (click)="color='lightgreen'">Green
+  <input type="radio" name="colors" (click)="color='yellow'">Yellow
+  <input type="radio" name="colors" (click)="color='cyan'">Cyan
+</div>
+<p [appHighlight]="color">Highlight me!</p>
+
+<app-my-custom-input [label]="'Name'">
+    <input type="text">
+</app-my-custom-input>
+
+<app-my-custom-input [label]="'Password'">
+    <input type="password">
+</app-my-custom-input>
+
+ <app-my-custom-input [label]="'Number'">
+    <input type="date">
+</app-my-custom-input>
+<!-- 
+<p #hello> Helloooo...!!!</p>
+<ng-content></ng-content> -->
+<!-- <input type="checkbox"  (change)="onChecked($event)"> 
+<p #checked>How Are You..?<p> -->
+<!-- <h2>To Do List</h2>
+<div>
+	<div>
+		<form (submit)="AddList(listname)"> 
+		<input type="text" name="listname" [(ngModel)]="listname">
+		<button  type="submit">Add To Do Lists</button>
+	</form>
+	</div> -->
+<!-- 
+<form (submit)="addTodo($event)">
+      	<input [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" class="textfield" name="newTodo">
+        <button  type="submit" [disabled]="newTodo===''">Add Todo</button>
+      </form> -->
+
+<!-- <ul *ngFor="let list of lists;let index=i;">
+	<li>
+		<input type="checkbox"  > 
+		<label #checked>{{list}}</label>
+	</li>
+</ul> -->
+
+<!-- <div *ngFor="let list of lists">
+        <label>
+                <input type="checkbox" (change)="onChecked($event)"/>
+                <span #checked>>{{list}}</span>
+         </label>
+ </div> -->
+
+ <!--  <ul>
+      <li *ngFor="let list of lists; let i=index">
+        <input type="checkbox" class="checkbox"  (change)="onChecked($event,list)" />
+      	<span #checked>{{ list }}</span>
+      	<span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
+      </li>
+  </ul> -->
+<!-- 
+  <ul>
+      <li *ngFor="let list of lists; let i=index">
+        <input type="checkbox" class="checkbox" [(ngModel)]="list.completed"/>
+      <span [ngClass]="{'checked': todo.completed}">{{ list.newTodo }}</span>
+     
+        </li>
+        </ul>
+
+
+</div> -->
+
+
+<br/>
+<br/>
+
+
+<!-- <app-app-child   [ctMsg]="cityMsg" 				
+				[ctArray]="cityArray"	
+				[studentAddMsg]="stdAddMsg">					
+</app-app-child> -->
+
+<!-- <div class="todos">
+
+   <div>
+
+      <form (submit)="addTodo($event)">
+      	<input [(ngModel)]="newTodo" (keyup.enter)="newTodo=''" class="textfield" name="newTodo">
+        <button  type="submit" [disabled]="newTodo===''">Add Todo</button>
+      </form>
+
+
+
+      </div>
+
+      <div [hidden]="newTodo">
+        Type in a new todo...
+      </div>
+
+      <div [hidden]="!newTodo">
+       
+        Typing: {{ newTodo }}
+      </div>
+
+      <ul>
+      <li *ngFor="let todo of todos; let i=index">
+        <input type="checkbox" class="checkbox" [(ngModel)]="todo.completed" />
+      <span [ngClass]="{'checked': todo.completed}">{{ todo.newTodo }}</span>
+      <span (click)="deleteTodo(i)" class="delete-icon">[X]</span>
+        </li>
+        </ul>
+
+        <div class="mtop20">
+      <button (click)="deleteSelectedTodos()">Delete Selected</button>
+      </div>
+
+  </div>
+ -->
+
+
+  <div class="todos">
+  <div>
+  <form (submit)="addTodoEvent($event)">
+    <input type="text" [(ngModel)]="newTodo" 
+    (keyup.enter)="newTodo=''" class="form-control" name="newTodo">
+    <button type="submit" class="btn btn-primary" [disabled]="newTodo===''">AddTodo </button>
+  </form>
+  <span [hidden]="newTodo"> Type your newtoDo</span>
+  <span [hidden]="!newTodo"> Todo : {{newTodo}}</span>
+
+  <br/>
+  <ul>
+    <li *ngFor="let todo of todos;let i=index;">
+      <input type="checkbox" [(ngModel)]="todo.completed">
+      <span [ngClass]="{'checked':todo.completed}">{{todo.newTodo}}</span>
+      <span (click)="deleteTodo(i)">[X]</span>
+    </li>
+  </ul>
+
+  <div>
+    <button type="button" (click)="deleteSelectedTodos()">Delete</button>
+  </div>
+
+</div>
+</div>
+
+
+<hr/>
+<hr/>
+<div>
+<select class="dropdown" [(ngModel)]="countrySelected" (ngModelChange)="updateCountry($event)">
+  <option *ngFor="let coutnry of countries;let i=index" [attr.selected]="i==0">
+    {{coutnry.name}}
+  </option>
+
+</select>
+
+
+<select class="dropdown">
+  <option *ngFor="let city of cities;let i=index" [attr.selected]="i==0">
+    {{city}}
+  </option>
+
+</select>
+
+</div>
+
+
+
+    
+   
